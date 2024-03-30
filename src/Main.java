@@ -1,12 +1,13 @@
 import com.jjh.sorting.BubbleSort;
+import com.jjh.sorting.SelectionSort;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        BubbleSort bubbleSort = new BubbleSort();
-        int[] arr = new int[]{2,4,5,6,4,2,3};
-        bubbleSort.sort(arr);
+        SelectionSort selectionSort = new SelectionSort();
+        int[] arr = new int[]{4,2,2,6,4,3,2};
+        selectionSort.sort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
