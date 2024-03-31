@@ -9,7 +9,7 @@ public class Main {
         InsertionSort insertionSort = new InsertionSort();
         int[] arr1 = new int[]{4,3,2,1,0};
         int[] arr2 = new int[]{};
-        int[] arr3 = new int[]{1,2,0};
+        int[] arr3 = new int[]{1,2,2,0};
         insertionSort.sort(arr3);
         System.out.println(Arrays.toString(arr3));
 
