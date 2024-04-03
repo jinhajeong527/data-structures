@@ -1,10 +1,17 @@
+import com.jjh.binarytree.Tree;
 import com.jjh.searching.Search;
+
 
 public class Main {
     public static void main(String[] args) {
-        Search search = new Search();
-        int[] arr = new int[] {1,2,3,4,5,6,7,8};
-        int index1 = search.binarySearch_iterative(arr, 102);
-        System.out.println("index1: "  + index1);
+        Tree tree = new Tree();
+        tree.insert(7);
+        tree.insert(4);
+        tree.insert(9);
+        tree.insert(1);
+        tree.insert(6);
+        tree.insert(8);
+        tree.insert(10);
+        System.out.println("Done");
     }
 }
