@@ -13,5 +13,7 @@ public class Main {
         tree.insert(8);
         tree.insert(10);
         System.out.println("Done");
+        System.out.println(tree.find(12)); // false
+        System.out.println(tree.find(9));
     }
 }
