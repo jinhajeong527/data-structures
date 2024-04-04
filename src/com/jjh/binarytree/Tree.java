@@ -58,5 +58,44 @@ public class Tree {
         return false;
     }
 
+    // Since Node is a private class, we made method with no parameter as public
+    public void traversePreOrder() {
+        traversePreOrder(root);
+    }
+    // Preorder: Root - Left - Right
+    private void traversePreOrder(Node root) {
+        // Base condition
+        if (root == null)
+            return;
+        // root (print)
+        System.out.println(root.value);
+        // left
+        traversePreOrder(root.leftChild);
+        // right
+        traversePreOrder(root.rightChild);
+    }
+    public void traverseInOrder() {
+        traverseInOrder(root);
+    }
+    // Inorder: Left - Root - Right
+    private void traverseInOrder(Node root) {
+        if (root == null)
+            return;
+        traverseInOrder(root.leftChild);
+        System.out.println(root.value);
+        traverseInOrder(root.rightChild);
+    }
+    public void traversePostOrder() {
+        traversePostOrder(root);
+    }
+    // Postorder: Left - Right - Root
+    private void traversePostOrder(Node root) {
+        if (root == null)
+            return;
+        traversePostOrder(root.leftChild);
+        traversePostOrder(root.rightChild);
+        System.out.println(root.value);
+    }
+
 
 }

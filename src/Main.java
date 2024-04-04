@@ -1,15 +1,15 @@
-
+import com.jjh.binarytree.Tree;
 
 public class Main {
     public static void main(String[] args) {
-        // 4! = 4 * 3!
-        // n! = n * (n -1)!
-        System.out.println(factorial(4));
-    }
-    public static int factorial(int n) {
-        // Base condition
-        if (n == 0)
-            return 1;
-        return n * factorial(n - 1);
+        Tree tree = new Tree();
+        tree.insert(7);
+        tree.insert(4);
+        tree.insert(9);
+        tree.insert(1);
+        tree.insert(6);
+        tree.insert(8);
+        tree.insert(10);
+        tree.traversePostOrder();
     }
 }
