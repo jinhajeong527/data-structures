@@ -89,12 +89,26 @@ public class Tree {
         traversePostOrder(root);
     }
     // Postorder: Left - Right - Root
+    // Visit all the leaves first before going up in the tree.
     private void traversePostOrder(Node root) {
         if (root == null)
             return;
         traversePostOrder(root.leftChild);
         traversePostOrder(root.rightChild);
         System.out.println(root.value);
+    }
+    public int height() {
+        return height(root);
+    }
+    private int height(Node root) {
+        if (root == null)
+            return -1;
+        // base condition
+        if (root.leftChild == null && root.rightChild == null) {
+            return 0;
+        }
+        return 1 + Math.max(height(root.leftChild),
+                            height(root.rightChild));
     }
 
 
