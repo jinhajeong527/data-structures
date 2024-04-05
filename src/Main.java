@@ -12,6 +12,6 @@ public class Main {
         tree.insert(33);
         tree.insert(3);
         tree.insert(8);
-        System.out.println(tree.height());
+        System.out.println(tree.min_binarySearchTree());
     }
 }

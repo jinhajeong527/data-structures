@@ -104,12 +104,46 @@ public class Tree {
         if (root == null)
             return -1;
         // base condition
-        if (root.leftChild == null && root.rightChild == null) {
+        if (isLeaf(root)) {
             return 0;
         }
         return 1 + Math.max(height(root.leftChild),
                             height(root.rightChild));
     }
+    public int min() {
+        return min(root);
+    }
+    public int min_binarySearchTree() {
+        return min_binarySearchTree(root);
+    }
+    // O(log n)
+    private int min_binarySearchTree(Node root) {
+        if (root == null) {
+            throw new IllegalArgumentException();
+        }
+        Node current = root;
+        Node last = current;
+        while (current != null) {
+            last = current;
+            current = current.leftChild;
+        }
+        return last.value;
+    }
+    // O(n)
+    private int min(Node root) {
+        if (root == null) {
+            throw new IllegalArgumentException();
+        }
+        if (isLeaf(root))
+            return root.value;
 
+        int left = min(root.leftChild);
+        int right = min(root.rightChild);
 
+        return Math.min(Math.min(left, right), root.value);
+    }
+
+    private boolean isLeaf(Node root) {
+        return root.leftChild == null && root.rightChild == null;
+    }
 }
