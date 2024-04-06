@@ -142,7 +142,24 @@ public class Tree {
 
         return Math.min(Math.min(left, right), root.value);
     }
+    public boolean equals(Tree other) {
+        if (other == null) {
+            return false;
+        }
+        return equals(root, other.root);
+    }
 
+    private boolean equals(Node first, Node second) {
+        if (first == null && second == null) {
+            return true;
+        }
+        if (first == null || second == null) {
+            return false;
+        }
+        return first.value == second.value
+                && equals(first.leftChild, second.leftChild)
+                && equals(first.rightChild, second.rightChild);
+    }
     private boolean isLeaf(Node root) {
         return root.leftChild == null && root.rightChild == null;
     }
