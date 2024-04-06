@@ -5,19 +5,16 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Tree tree1 = new Tree();
-        tree1.insert(20);
-        tree1.insert(10);
-        tree1.insert(30);
-        tree1.insert(6);
-        tree1.insert(12);
-        tree1.insert(25);
-        tree1.insert(33);
-        tree1.insert(3);
-        tree1.insert(8);
-        ArrayList<Integer> list = tree1.getNodesAtDistance(3);
-        for (Integer item : list) {
-            System.out.println(item);
-        }
+        Tree tree = new Tree();
+        tree.insert(20);
+        tree.insert(10);
+        tree.insert(30);
+        tree.insert(6);
+        tree.insert(12);
+        tree.insert(25);
+        tree.insert(33);
+        tree.insert(3);
+        tree.insert(8);
+        tree.traverseLevelOrder();
     }
 }

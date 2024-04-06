@@ -200,6 +200,14 @@ public class Tree {
         getNodesAtDistance(node.leftChild, distance - 1, list);
         getNodesAtDistance(node.rightChild, distance - 1, list);
     }
+    // BFS
+    public void traverseLevelOrder() {
+        for (int i = 0; i <= height(); i++) {
+            for (Integer value: getNodesAtDistance(i)) {
+                System.out.println("distance:" + i + " => " +value);
+            }
+        }
+    }
 
     private boolean isLeaf(Node root) {
         return root.leftChild == null && root.rightChild == null;
