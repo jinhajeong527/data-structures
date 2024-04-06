@@ -1,5 +1,8 @@
 import com.jjh.binarytree.Tree;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         Tree tree1 = new Tree();
@@ -12,20 +15,9 @@ public class Main {
         tree1.insert(33);
         tree1.insert(3);
         tree1.insert(8);
-        System.out.println();
-
-        Tree tree2 = new Tree();
-        tree2.insert(20);
-        tree2.insert(10);
-        tree2.insert(30);
-        tree2.insert(6);
-        tree2.insert(12);
-        tree2.insert(25);
-        tree2.insert(33);
-        tree2.insert(3);
-        tree2.insert(8);
-        tree2.swapRoot();
-        System.out.println(tree1.isBinarySearchTree()); // true
-        System.out.println(tree2.isBinarySearchTree()); // false
+        ArrayList<Integer> list = tree1.getNodesAtDistance(3);
+        for (Integer item : list) {
+            System.out.println(item);
+        }
     }
 }

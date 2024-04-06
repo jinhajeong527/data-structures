@@ -1,5 +1,8 @@
 package com.jjh.binarytree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tree {
     // Node
     private class Node {
@@ -180,6 +183,24 @@ public class Tree {
         return isBinarySearchTree(root.leftChild, min, root.value - 1)
                 && isBinarySearchTree(root.rightChild, root.value + 1, max);
     }
+    public ArrayList<Integer> getNodesAtDistance(int distance) {
+        ArrayList<Integer> list = new ArrayList<>();
+        getNodesAtDistance(root, distance, list);
+        return list;
+    }
+
+    private void getNodesAtDistance(Node node, int distance, ArrayList<Integer> list) {
+        if (node == null) {
+            return;
+        }
+        if (distance == 0) {
+            list.add(node.value);
+            return;
+        }
+        getNodesAtDistance(node.leftChild, distance - 1, list);
+        getNodesAtDistance(node.rightChild, distance - 1, list);
+    }
+
     private boolean isLeaf(Node root) {
         return root.leftChild == null && root.rightChild == null;
     }
