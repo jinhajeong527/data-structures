@@ -204,7 +204,7 @@ public class Tree {
     public void traverseLevelOrder() {
         for (int i = 0; i <= height(); i++) {
             for (Integer value: getNodesAtDistance(i)) {
-                System.out.println("distance:" + i + " => " +value);
+                System.out.println("depth:" + i + " => " +value);
             }
         }
     }
