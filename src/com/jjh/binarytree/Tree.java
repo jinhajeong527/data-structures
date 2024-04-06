@@ -160,6 +160,26 @@ public class Tree {
                 && equals(first.leftChild, second.leftChild)
                 && equals(first.rightChild, second.rightChild);
     }
+
+    // for test purpose of isBinarySearchTree method
+    public void swapRoot() {
+        Node temp = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = temp;
+    }
+    public boolean isBinarySearchTree() {
+        return isBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    private boolean isBinarySearchTree(Node root, int min, int max) {
+        if (root == null) {
+            return true;
+        }
+        if (root.value < min || root.value > max) {
+            return false;
+        }
+        return isBinarySearchTree(root.leftChild, min, root.value - 1)
+                && isBinarySearchTree(root.rightChild, root.value + 1, max);
+    }
     private boolean isLeaf(Node root) {
         return root.leftChild == null && root.rightChild == null;
     }

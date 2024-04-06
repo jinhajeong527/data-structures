@@ -12,6 +12,7 @@ public class Main {
         tree1.insert(33);
         tree1.insert(3);
         tree1.insert(8);
+        System.out.println();
 
         Tree tree2 = new Tree();
         tree2.insert(20);
@@ -23,6 +24,8 @@ public class Main {
         tree2.insert(33);
         tree2.insert(3);
         tree2.insert(8);
-        System.out.println(tree1.equals(tree2));
+        tree2.swapRoot();
+        System.out.println(tree1.isBinarySearchTree()); // true
+        System.out.println(tree2.isBinarySearchTree()); // false
     }
 }
