@@ -1,6 +1,8 @@
 package com.jjh.hashtables;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CharFinder {
     public char findFirstNonRepeatingChar(String str) {
@@ -23,6 +25,22 @@ public class CharFinder {
             }
         }
         return  Character.MIN_VALUE;
+    }
+
+    public char findFirstRepeatedChar(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException();
+        }
+        str = str.toLowerCase();
+        Set<Character> set = new HashSet<>();
+        for (char ch : str.toCharArray()) {
+            if (set.contains(ch)) {
+                return ch;
+            }
+            set.add(ch);
+        }
+        // None of the character repeated
+        return Character.MIN_VALUE;
     }
 
 }
