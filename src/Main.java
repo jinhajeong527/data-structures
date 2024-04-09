@@ -1,14 +1,12 @@
 import com.jjh.hashtables.HashTable;
+import com.jjh.searching.Search;
 
 
 public class Main {
     public static void main(String[] args) {
-        HashTable hashTable = new HashTable();
-        hashTable.put(6, "Jenny");
-        hashTable.put(8, "Clide");
-        hashTable.put(11, "Bony");
-        hashTable.put(6, "Jinha");
-        hashTable.remove(6);
-        System.out.println(hashTable.get(6));
+        Search search = new Search();
+        int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10};
+        int index = search.ternarySearch_recursive(arr, 3);
+        System.out.println(index);
     }
 }

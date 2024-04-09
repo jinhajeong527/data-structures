@@ -26,6 +26,29 @@ public class Search {
 
         return binarySearch_recursive(arr, key, left, mid -1);
     }
+    public int ternarySearch_recursive(int[] arr, int key) {
+       return ternarySearch_recursive(arr, key, 0, arr.length);
+    }
+
+    private int ternarySearch_recursive(int[] arr, int key, int left, int right) {
+        // base condition
+        if (left > right) return -1;
+
+        int partitionSize = (left + right) / 3;
+        int mid1 = left + partitionSize;
+        int mid2 = right - partitionSize;
+
+        if (key == arr[mid1]) return mid1;
+        if (key == arr[mid2]) return mid2;
+
+        if (key < arr[mid1]) {
+            return ternarySearch_recursive(arr, key, left, mid1 - 1);
+        }
+        if (key > arr[mid2]) {
+            return ternarySearch_recursive(arr, key, mid2 + 1, right);
+        }
+        return ternarySearch_recursive(arr, key, mid1 + 1, mid2 - 1);
+    }
 
     public int binarySearch_iterative(int[] arr, int key) {
         int left = 0;
