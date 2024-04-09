@@ -27,7 +27,7 @@ public class Search {
         return binarySearch_recursive(arr, key, left, mid -1);
     }
     public int ternarySearch_recursive(int[] arr, int key) {
-       return ternarySearch_recursive(arr, key, 0, arr.length);
+       return ternarySearch_recursive(arr, key, 0, arr.length -1);
     }
 
     private int ternarySearch_recursive(int[] arr, int key, int left, int right) {
