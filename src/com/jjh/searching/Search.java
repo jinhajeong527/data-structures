@@ -34,7 +34,7 @@ public class Search {
         // base condition
         if (left > right) return -1;
 
-        int partitionSize = (left + right) / 3;
+        int partitionSize = (right - left) / 3;
         int mid1 = left + partitionSize;
         int mid2 = right - partitionSize;
 
