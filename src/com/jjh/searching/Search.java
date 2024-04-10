@@ -67,4 +67,25 @@ public class Search {
         }
         return -1;
     }
+    public int jumpSearch(int[] arr, int key) {
+        int length = arr.length;
+        // calculate the ideal size of the block
+        int blockSize = (int) Math.sqrt(length);
+        int start = 0;
+        int next = blockSize;
+        while (start < length
+                && arr[next -1] < key) {
+            start = next;
+            next += blockSize;
+            if (next > length) {
+                next = arr.length;
+            }
+        }
+        for (int i = start; i < next; i++) {
+            if (arr[i] == key) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
