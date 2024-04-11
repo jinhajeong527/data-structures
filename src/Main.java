@@ -7,7 +7,7 @@ public class Main {
         int[] arr1 = new int[]{1,2,3,4,5,6,7,8,9,10,12};
         int[] arr2 = new int[]{1};
         int[] arr3 = new int[]{};
-        int index = search.jumpSearch(arr3, 11);
+        int index = search.exponentialSearch(arr3, 112);
         System.out.println(index);
     }
 }

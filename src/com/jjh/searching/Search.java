@@ -88,4 +88,16 @@ public class Search {
         }
         return -1;
     }
+
+    public int exponentialSearch(int[] arr, int key) {
+        int bound = 1;
+        while (bound < arr.length
+                && arr[bound] < key) {
+            bound *= 2;
+        }
+        int left = bound / 2;
+        // In case bound is same or bigger than the arr.length
+        int right = Math.min(bound, arr.length - 1);
+        return binarySearch_recursive(arr, key, left, right);
+    }
 }
