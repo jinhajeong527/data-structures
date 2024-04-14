@@ -1,13 +1,21 @@
-import com.jjh.string.StringUtils;
+import com.jjh.graphs.Graph;
 
 
 public class Main {
     public static void main(String[] args) {
-        int count1 = StringUtils.findNumberOfVowels("Hello World");
-        int count2 = StringUtils.findNumberOfVowels("");
-        int count3 = StringUtils.findNumberOfVowels(null);
-        System.out.println(count1);
-        System.out.println(count2);
-        System.out.println(count3);
+        Graph graph = new Graph();
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("C");
+        graph.addEdge("A", "B");
+        graph.addEdge("A", "C");
+//        graph.removeEdge("A", "/C");
+        graph.removeEdge("A", "D");
+//        graph.removeNode("B");
+        graph.removeNode("A");
+        graph.addEdge("B", "C");
+        graph.print();
+
+
     }
 }

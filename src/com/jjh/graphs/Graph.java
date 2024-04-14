@@ -34,6 +34,29 @@ public class Graph {
             throw new IllegalArgumentException();
         adjacencyList.get(fromNode).add(toNode);
     }
+    public void removeNode(String label) {
+        Node node = nodes.get(label);
+        if (node == null)
+            return;
+
+        for (Node key: adjacencyList.keySet()) {
+            adjacencyList.get(key).remove(node);
+        }
+
+        adjacencyList.remove(node);
+        nodes.remove(label);
+
+    }
+
+    public void removeEdge(String from, String to) {
+        Node fromNode = nodes.get(from);
+        Node toNode = nodes.get(to);
+        if (fromNode == null)
+            return;
+        if (toNode == null)
+            return;
+        adjacencyList.get(fromNode).remove(toNode);
+    }
 
     public void print() {
         for (Node source : adjacencyList.keySet()) {
