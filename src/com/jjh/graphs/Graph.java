@@ -58,6 +58,26 @@ public class Graph {
         adjacencyList.get(fromNode).remove(toNode);
     }
 
+    public void traverseDepthFirst(String label) {
+        Node node = nodes.get(label);
+        if (node == null)
+            return;
+
+        traverseDepthFirst(nodes.get(label), new HashSet<>());
+    }
+
+    private void traverseDepthFirst(Node node, Set<Node> visited) {
+        System.out.println(node);
+        visited.add(node);
+
+        for (Node ad: adjacencyList.get(node)) {
+            if (!visited.contains(ad)) {
+                traverseDepthFirst(ad, visited);
+            }
+        }
+
+    }
+
     public void print() {
         for (Node source : adjacencyList.keySet()) {
             List<Node> target = adjacencyList.get(source);
