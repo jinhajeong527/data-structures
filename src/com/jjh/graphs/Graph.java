@@ -66,6 +66,31 @@ public class Graph {
         traverseDepthFirst(nodes.get(label), new HashSet<>());
     }
 
+    public void traverseDepthFirstIterative(String label) {
+        Node node = nodes.get(label);
+        if (node == null)
+            return;
+
+        Set<Node> visited = new HashSet<>();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            if (visited.contains(current))
+                continue;
+            System.out.println(current);
+            visited.add(current);
+
+            for (Node neighbour: adjacencyList.get(current)) {
+                if (!visited.contains(neighbour)) {
+                    stack.push(neighbour);
+                }
+            }
+        }
+    }
+
+
     private void traverseDepthFirst(Node node, Set<Node> visited) {
         System.out.println(node);
         visited.add(node);
@@ -76,6 +101,32 @@ public class Graph {
             }
         }
 
+    }
+
+    public void traverseBreadthFirst(String label) {
+        Node node = nodes.get(label);
+        if (node == null)
+            return;
+        // To keep the track of visited nodes
+        Set<Node> visited = new HashSet<>();
+
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.remove();
+
+            if (visited.contains(current))
+                continue;
+            System.out.println(current);
+            visited.add(current);
+
+            for (Node neighbors: adjacencyList.get(current)) {
+                if (!visited.contains(neighbors)) {
+                    queue.add(neighbors);
+                }
+            }
+        }
     }
 
     public void print() {
