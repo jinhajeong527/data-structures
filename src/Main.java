@@ -12,7 +12,8 @@ public class Main {
         graph.addEdge("B", "D");
         graph.addEdge("D", "C");
         graph.addEdge("A", "C");
-        graph.traverseDepthFirst("C");
-        graph.traverseDepthFirst("F");
+        graph.traverseDepthFirstIterative("C");
+        graph.traverseDepthFirstIterative("A");
+        graph.traverseDepthFirstIterative("R");
     }
 }
