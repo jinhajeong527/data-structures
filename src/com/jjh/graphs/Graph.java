@@ -156,6 +156,43 @@ public class Graph {
         stack.push(node);
     }
 
+    public boolean hasCycle() {
+        Set<Node> all = new HashSet<>();
+        all.addAll(nodes.values());
+
+        Set<Node> visiting = new HashSet<>();
+        Set<Node> visited = new HashSet<>();
+
+        while (!all.isEmpty()) {
+//            Node current = all.toArray(new Node[0])[0];
+            Node current = all.iterator().next();
+            if (hasCycle(current, all, visiting, visited)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean hasCycle(Node node, Set<Node> all,
+                             Set<Node> visiting, Set<Node> visited) {
+        all.remove(node);
+        visiting.add(node);
+        for (Node neighbour : adjacencyList.get(node)) {
+            if (visited.contains(neighbour)) {
+                continue;
+            }
+            // If you have this node in the visiting Set,
+            // it means that there is a cycle in our graph
+            if (visiting.contains(neighbour))
+                return true;
+
+            if (hasCycle(neighbour, all, visiting, visited))
+                return true;
+        }
+        visiting.remove(node);
+        visited.add(node);
+        return false;
+    }
+
     public void print() {
         for (Node source : adjacencyList.keySet()) {
             List<Node> target = adjacencyList.get(source);
