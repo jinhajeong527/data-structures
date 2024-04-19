@@ -79,20 +79,24 @@ public class WeightedGraph {
     }
 
 
-    public int getShortestDistance(String from, String to) {
-        Map<Node, Integer> distances = new HashMap<>();
-
-        for (Node node: nodes.values()) {
-            distances.put(node, Integer.MAX_VALUE);
-        }
-
+    public Path getShortestDistance(String from, String to) {
         Node fromNode = nodes.get(from);
         if (fromNode == null) {
             throw new IllegalArgumentException();
         }
+        Node toNode = nodes.get(to);
+        if (toNode == null) {
+            throw new IllegalArgumentException();
+        }
+
+        Map<Node, Integer> distances = new HashMap<>();
+        for (Node node: nodes.values()) {
+            distances.put(node, Integer.MAX_VALUE);
+        }
         // Replace distance of starting Node from Integer.MAX_VALUE to 0
         distances.replace(fromNode, 0);
 
+        Map<Node, Node> previousNodes = new HashMap<>();
         Set<Node> visited = new HashSet<>();
 
         PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
@@ -110,10 +114,30 @@ public class WeightedGraph {
                 int newDistance = distances.get(current) + edge.weight;
                 if (distance > newDistance) {
                     distances.replace(edge.to, newDistance);
+                    previousNodes.put(edge.to, current);
                     queue.add(new NodeEntry(edge.to, newDistance));
                 }
             }
         }
-        return distances.get(nodes.get(to));
+
+        return buildPath(previousNodes, toNode);
+    }
+
+    private Path buildPath(
+            Map<Node, Node> previousNodes, Node toNode) {
+        // We can build a shortest path using a Stack
+        Stack<Node> stack = new Stack<>();
+        stack.push(toNode);
+        Node prev = previousNodes.get(toNode);
+        while (prev != null) {
+            stack.push(prev);
+            prev = previousNodes.get(prev);
+        }
+
+        Path path = new Path();
+        while (!stack.isEmpty()) {
+            path.add(stack.pop().label);
+        }
+        return path;
     }
 }
