@@ -123,6 +123,29 @@ public class WeightedGraph {
         return buildPath(previousNodes, toNode);
     }
 
+    public boolean hasCycle() {
+        Set<Node> visited = new HashSet<>();
+        for (Node node: nodes.values()) {
+            if (!visited.contains(node) &&
+                    hasCycle(node, null, visited))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean hasCycle(Node current, Node parent,
+                             Set<Node> visited) {
+        visited.add(current);
+        for (Edge edge: current.getEdges()) {
+            if (edge.to == parent)
+                continue;
+
+            if (visited.contains(edge.to) || hasCycle(edge.to, current, visited))
+                return true;
+        }
+        return false;
+    }
+
     private Path buildPath(
             Map<Node, Node> previousNodes, Node toNode) {
         // We can build a shortest path using a Stack
@@ -140,4 +163,5 @@ public class WeightedGraph {
         }
         return path;
     }
+
 }
