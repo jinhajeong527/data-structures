@@ -7,11 +7,14 @@ public class Main {
         graph.addNode("B");
         graph.addNode("C");
         graph.addNode("D");
-        graph.addNode("E");
-        graph.addEdge("A", "B", 3);
+        graph.addEdge("A", "B", 4);
         graph.addEdge("A", "C", 2);
-        graph.addEdge("A", "D", 4);
-//        graph.addEdge("C", "D", 4);
-        System.out.println(graph.hasCycle());
+        graph.addEdge("A", "D", 6);
+        graph.addEdge("B", "C", 7);
+        graph.addEdge("B", "D", 5);
+        graph.addEdge("C", "D", 5);
+        WeightedGraph tree = graph.getMinimumSpanningTree();
+        tree.print();
+
     }
 }

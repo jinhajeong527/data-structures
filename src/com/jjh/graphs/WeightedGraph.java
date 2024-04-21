@@ -78,7 +78,6 @@ public class WeightedGraph {
         }
     }
 
-
     public Path getShortestDistance(String from, String to) {
         Node fromNode = nodes.get(from);
         if (fromNode == null) {
@@ -132,6 +131,47 @@ public class WeightedGraph {
         }
         return false;
     }
+
+    public WeightedGraph getMinimumSpanningTree() {
+        WeightedGraph tree = new WeightedGraph();
+
+        if (nodes.isEmpty())
+            return tree;
+
+        // To find minimum weight edge
+        PriorityQueue<Edge> edges = new PriorityQueue<>(
+                Comparator.comparingInt(e -> e.weight)
+        );
+
+        // Start from any node in the graph
+        Node startNode = nodes.values().iterator().next();
+        edges.addAll(startNode.getEdges());
+        tree.addNode(startNode.label);
+
+        if (edges.isEmpty())
+            return tree;
+
+        while (tree.nodes.size() < nodes.size()) {
+            Edge minEdge = edges.remove();
+            Node nextNode = minEdge.to;
+
+            if (tree.containsNode(nextNode.label))
+                continue;
+            tree.addNode(nextNode.label);
+            tree.addEdge(minEdge.from.label,
+                    minEdge.to.label, minEdge.weight);
+            for (Edge edge : nextNode.getEdges()) {
+                if (!tree.containsNode(edge.to.label))
+                    edges.add(edge);
+            }
+        }
+        return tree;
+    }
+
+    public boolean containsNode(String label) {
+        return nodes.containsKey(label);
+    }
+
 
     private boolean hasCycle(Node current, Node parent,
                              Set<Node> visited) {
