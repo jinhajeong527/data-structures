@@ -1,7 +1,6 @@
-package com.jjh.binarytree;
+package com.jjh.binarytrees;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Tree {
     // Node
