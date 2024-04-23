@@ -6,6 +6,5 @@ public class Main {
         tree.insert(3);
         tree.insert(5);
         tree.insert(7);
-
     }
 }
