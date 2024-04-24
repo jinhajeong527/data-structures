@@ -31,8 +31,30 @@ public class AVLTree {
         else
             root.rightChild = insert(root.rightChild, value);
         // On the way back up, reset the height of root node
-        root.height = Math.max(height(root.leftChild), height(root.rightChild)) + 1;
+        root.height = Math.max(
+                height(root.leftChild),
+                height(root.rightChild)) + 1;
+
+        // > 1 => left heavy
+        if (isLeftHeavy(root)) {
+            System.out.println(root.value + " is left heavy");
+        }
+        // < -1 => right heavy
+        else if  (isRightHeavy(root)) {
+            System.out.println(root.value + " is right heavy");
+        }
         return root;
+    }
+    private boolean isLeftHeavy(AVLNode node) {
+        return balanceFactor(node) > 1;
+    }
+
+    private boolean isRightHeavy(AVLNode node) {
+        return balanceFactor(node) < -1;
+    }
+
+    private int balanceFactor(AVLNode node) {
+        return (node == null) ? 0 : height(node.leftChild) - height(node.rightChild);
     }
 
     private int height(AVLNode node) {
