@@ -16,14 +16,18 @@ public class Heap {
         bubbleUp();
     }
 
-    public void remove() {
+    public int remove() {
         if (isEmpty()) {
             throw new IllegalStateException();
         }
+        int root = heap[0];
         heap[0] = heap[--currentIndex];
         // Reset the last element
         heap[currentIndex] = 0;
+
         bubbleDown();
+
+        return root;
     }
 
     private void bubbleUp() {
@@ -44,13 +48,36 @@ public class Heap {
     }
 
     private int largerChildIndex(int index) {
+        if (!hasLeftChild(index))
+            return index;
+
+        if (!hasRightChild(index))
+            return leftChildIndex(index);
+
         return leftChild(index) > rightChild(index) ?
                 leftChildIndex(index) : rightChildIndex(index);
     }
 
+    private boolean hasLeftChild(int index) {
+        return leftChildIndex(index) <= currentIndex;
+    }
+
+    private boolean hasRightChild(int index) {
+        return rightChildIndex(index) <= currentIndex;
+    }
+
     private boolean isValidParent(int index) {
-        return heap[index] >= leftChild(index) &&
-                heap[index] >= rightChild(index);
+        if (!hasLeftChild(index))
+            return true;
+
+        // If right child does not exist, only this factor will determine
+        // whether the parent is valid.
+        boolean isValid =  heap[index] >= leftChild(index);
+
+        if (hasRightChild(index))
+            isValid &= heap[index] >= rightChild(index);
+
+        return isValid;
     }
 
     public boolean isFull() {
