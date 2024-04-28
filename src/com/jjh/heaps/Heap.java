@@ -16,6 +16,16 @@ public class Heap {
         bubbleUp();
     }
 
+    public void remove() {
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
+        heap[0] = heap[--currentIndex];
+        // Reset the last element
+        heap[currentIndex] = 0;
+        bubbleDown();
+    }
+
     private void bubbleUp() {
         int index = currentIndex - 1;
         while (index > 0 && heap[parent(index)] < heap[index]) {
@@ -24,8 +34,31 @@ public class Heap {
         }
     }
 
+    private void bubbleDown() {
+        int index = 0;
+        while(index <= currentIndex && !isValidParent(index)) {
+            int largerChildIndex = largerChildIndex(index);
+            swap(index, largerChildIndex);
+            index = largerChildIndex;
+        }
+    }
+
+    private int largerChildIndex(int index) {
+        return leftChild(index) > rightChild(index) ?
+                leftChildIndex(index) : rightChildIndex(index);
+    }
+
+    private boolean isValidParent(int index) {
+        return heap[index] >= leftChild(index) &&
+                heap[index] >= rightChild(index);
+    }
+
     public boolean isFull() {
         return currentIndex == heap.length;
+    }
+
+    public boolean isEmpty() {
+        return currentIndex == 0;
     }
 
     private void swap(int first, int second) {
@@ -38,43 +71,19 @@ public class Heap {
         return (index - 1) / 2;
     }
 
-//    public void remove() {
-//        if (currentIndex == 0) {
-//            System.out.println("Nothing to delete in this heap");
-//            return;
-//        }
-//
-//        int lastInserted = currentIndex - 1;
-//        int root = 0;
-//        int left = 1;
-//        int right = 2;
-//        heap[root] = heap[lastInserted];
-//        while (left <= lastInserted) {
-//            if (right <= lastInserted && (heap[left] > heap[right])) {
-//               int temp = heap[left];
-//               heap[left] = heap[root];
-//               heap[root] = temp;
-//               root = left;
-//            } else if (right <= lastInserted && (heap[left] <= heap[right])) {
-//                int temp = heap[right];
-//                heap[right] = heap[root];
-//                heap[root] = temp;
-//                root = right;
-//            } else if (right > lastInserted) {
-//                int temp = heap[left];
-//                heap[left] = heap[root];
-//                heap[root] = temp;
-//                break;
-//            }
-//            left = root * 2 + 1;
-//            right = root * 2 + 2;
-//            currentIndex--;
-//        }
-//    }
-//
-//    public void print() {
-//        for(int num : heap) {
-//            System.out.println(num);
-//        }
-//    }
+    private int leftChild(int index) {
+        return heap[leftChildIndex(index)];
+    }
+
+    private int rightChild(int index) {
+        return heap[rightChildIndex(index)];
+    }
+
+    private int leftChildIndex(int index) {
+        return index * 2 + 1;
+    }
+
+    private int rightChildIndex(int index) {
+        return index * 2 + 2;
+    }
 }
