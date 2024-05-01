@@ -25,6 +25,21 @@ public class MaxHeap {
         swap(array, index, largerIndex);
         heapify(array, largerIndex);
     }
+
+    public static int getKthLargest(int[] arr, int k) {
+        if (k < 1 || k > arr.length)
+            throw new IllegalArgumentException();
+
+        Heap heap = new Heap(arr.length);
+        for (int number: arr) {
+            heap.insert(number);
+        }
+        for (int i = 0; i < k - 1; i++) {
+            heap.remove();
+        }
+        return heap.max();
+    }
+
     private static void swap(int[] arr, int first, int second) {
         int temp = arr[first];
         arr[first] = arr[second];

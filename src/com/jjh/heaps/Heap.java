@@ -30,6 +30,12 @@ public class Heap {
         return root;
     }
 
+    public int max() {
+        if (isEmpty())
+            throw new IllegalStateException();
+        return heap[0];
+    }
+
     private void bubbleUp() {
         int index = currentIndex - 1;
         while (index > 0 && heap[parent(index)] < heap[index]) {
