@@ -40,6 +40,29 @@ public class MaxHeap {
         return heap.max();
     }
 
+    public static boolean isMaxHeap(int[] arr) {
+        if (arr.length == 0) {
+            return true;
+        }
+        return isMaxHeap(arr, 0);
+    }
+
+    private static boolean isMaxHeap(int[] arr, int index) {
+        int left = index * 2 + 1;
+        int right = index * 2 + 2;
+
+        if (left < arr.length && arr[index] < arr[left]) {
+            return false;
+        }
+        if (right < arr.length && arr[index] < arr[right]) {
+            return false;
+        }
+
+        return (left >= arr.length || isMaxHeap(arr, left))
+                && (right >= arr.length || isMaxHeap(arr, right));
+    }
+
+
     private static void swap(int[] arr, int first, int second) {
         int temp = arr[first];
         arr[first] = arr[second];
