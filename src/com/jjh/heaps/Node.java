@@ -11,4 +11,8 @@ public class Node {
     public int getKey() {
         return key;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

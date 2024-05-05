@@ -1,21 +1,22 @@
 import com.jjh.heaps.MinHeap;
-import com.jjh.heaps.Node;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Node> list = Arrays.asList(
-                new Node(17, "a"),
-                new Node(15, "b"),
-                new Node(13, "c"),
-                new Node(12, "d"),
-                new Node(11, "e"),
-                new Node(9, "f")
-        );
-
-        MinHeap.heapify(list);
-        System.out.println("Done");
+        MinHeap minHeap = new MinHeap();
+        minHeap.insert(10, "a");
+//        minHeap.insert(9, "b");
+//        minHeap.insert(8, "c");
+//        minHeap.insert(6, "d");
+//        minHeap.insert(3, "e");
+        String value = minHeap.remove();
+//        String value2 = minHeap.remove();
+//        String value3 = minHeap.remove();
+//        String value4 = minHeap.remove();
+//        String value5 = minHeap.remove();
+        System.out.println(value);
+//        System.out.println(value2);
+//        System.out.println(value3);
+//        System.out.println(value4);
+//        System.out.println(value5);
     }
 }
