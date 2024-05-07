@@ -102,11 +102,11 @@ public class MinHeap {
         return index * 2 + 2;
     }
 
-    private boolean isFull() {
+    public boolean isFull() {
         return size == nodes.length;
     }
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return size == 0;
     }
 
