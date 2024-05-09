@@ -44,6 +44,79 @@ public class Tree {
             }
         }
     }
+
+    public void remove(int value) {
+        Node parent = null;
+        Node current = root;
+
+        // find the target node for deletion
+        while (current != null && current.value != value) {
+            parent = current;
+            if (current.value < value) {
+                current = current.rightChild;
+            } else {
+                current = current.leftChild;
+            }
+        }
+        // no target node found
+        if (current == null) {
+            return;
+        }
+        // when target node is leaf node.
+        if (current.rightChild == null && current.leftChild == null) {
+            removeLeafNode(parent, current);
+        // when target node has one child node
+        } else if (current.rightChild == null || current.leftChild == null) {
+            removeNodeWithOneChild(parent, current);
+        // when target node has two child nodes
+        } else {
+            Node sParent = current;
+            Node successor = current.rightChild;
+
+            // find successor node ==> find the smallest value in the right subtree of current node
+            while (successor.leftChild != null) {
+                sParent = successor;
+                successor = successor.leftChild;
+            }
+            // replace target node's value with successor node value
+            current.value = successor.value;
+            // when successor node is leaf node
+            if (successor.rightChild == null) {
+                removeLeafNode(sParent, successor);
+            } else if (successor.value < sParent.value) {
+                sParent.leftChild = successor.rightChild;
+            } else {
+                sParent.rightChild = successor.rightChild;
+            }
+        }
+    }
+    private void removeLeafNode(Node parent, Node current) {
+        if (current != root) {
+            if (parent.leftChild == current) {
+                parent.leftChild = null;
+            } else {
+                parent.rightChild = null;
+            }
+        } else {
+            root = null;
+        }
+    }
+
+    private void removeNodeWithOneChild(Node parent, Node current) {
+        Node childNode = current.leftChild == null ? current.rightChild : current.leftChild;
+
+        if (current == root) {
+            root = childNode;
+            return;
+        }
+
+        if (current ==  parent.leftChild) {
+            parent.leftChild = childNode;
+        } else {
+            parent.rightChild = childNode;
+        }
+    }
+
     public boolean find(int value) {
         Node current = root;
 
