@@ -27,12 +27,20 @@ public class Trie {
             children.put(ch, new Node(ch));
         }
 
+        public void removeChild(char ch) {
+            children.remove(ch);
+        }
+
         public Node getChild(char ch) {
             return children.get(ch);
         }
 
         public Node[] getChildren() {
             return children.values().toArray(new Node[0]);
+        }
+
+        public boolean hasChildren() {
+            return !children.isEmpty();
         }
     }
     private final Node root = new Node(' ');
@@ -66,6 +74,38 @@ public class Trie {
     public void traverse() {
         traverse(root);
     }
+
+    public void remove(String word) {
+        if (word == null) {
+            return;
+        }
+        remove(root, word, 0);
+    }
+
+    private void remove(Node current, String word, int index) {
+        // since root node is empty string,
+        // base condition would be index == word.length(), not word.length() - 1
+        if (index == word.length()) {
+            current.isEndOfWord = false;
+            return;
+        }
+
+        char ch = word.charAt(index);
+        Node child = current.getChild(ch);
+
+        if (child == null) {
+            return;
+        }
+
+        remove(child, word, index + 1);
+
+        if (!child.hasChildren() && !child.isEndOfWord) {
+            current.removeChild(child.value);
+        }
+
+    }
+
+
 
     private void traverse(Node root) {
 //        // Pre-order: visit the root first
