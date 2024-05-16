@@ -30,6 +30,10 @@ public class Trie {
         public Node getChild(char ch) {
             return children.get(ch);
         }
+
+        public Node[] getChildren() {
+            return children.values().toArray(new Node[0]);
+        }
     }
     private final Node root = new Node(' ');
     public void insert(String word) {
@@ -57,5 +61,21 @@ public class Trie {
             current = current.getChild(ch);
         }
         return current.isEndOfWord;
+    }
+
+    public void traverse() {
+        traverse(root);
+    }
+
+    private void traverse(Node root) {
+//        // Pre-order: visit the root first
+//        System.out.println(root.value);
+
+        for (Node child : root.getChildren()) {
+            traverse(child);
+        }
+
+        // Post-order : visit the leaf node first
+        System.out.println(root.value);
     }
 }
