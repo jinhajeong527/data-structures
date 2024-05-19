@@ -1,6 +1,8 @@
 package com.jjh.tries;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Trie {
     // We can set this value from the outside before
@@ -82,6 +84,40 @@ public class Trie {
         remove(root, word, 0);
     }
 
+    public List<String> findWords(String prefix) {
+        List<String> words = new ArrayList<>();
+        var lastNode = findLastNodeOf(prefix);
+        findWords(lastNode, prefix, words);
+        return words;
+    }
+
+    private void findWords(Node root, String prefix, List<String> words) {
+        if (root == null) {
+            return;
+        }
+        if (root.isEndOfWord) {
+            words.add(prefix);
+        }
+        for (Node child : root.getChildren()) {
+            findWords(child, prefix + child.value, words);
+        }
+    }
+
+    private Node findLastNodeOf(String prefix) {
+        if (prefix == null) {
+            return null;
+        }
+        Node current = root;
+        for (char ch: prefix.toCharArray()) {
+            Node child =  current.getChild(ch);
+            if (child == null) {
+                return null;
+            }
+            current = child;
+        }
+        return current;
+    }
+
     private void remove(Node current, String word, int index) {
         // since root node is empty string,
         // base condition would be index == word.length(), not word.length() - 1
@@ -104,8 +140,6 @@ public class Trie {
         }
 
     }
-
-
 
     private void traverse(Node root) {
 //        // Pre-order: visit the root first
