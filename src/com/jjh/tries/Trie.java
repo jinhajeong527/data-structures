@@ -81,17 +81,17 @@ public class Trie {
     }
     private boolean containsRecursive(Node root, String word, int index) {
         if (index == word.length()) {
+            return root.isEndOfWord;
+        }
+        if (root == null) {
             return false;
         }
-        Node current = root.getChild(word.charAt(index));
-        if (current == null) {
+        char ch = word.charAt(index);
+        Node child = root.getChild(ch);
+        if (child == null) {
             return false;
         }
-        char val = current.value;
-        if (val == word.charAt(index) && current.isEndOfWord && index == word.length() - 1) {
-            return true;
-        }
-        return containsRecursive(current, word, index + 1);
+        return containsRecursive(child, word, index + 1);
     }
 
     public void traverse() {
