@@ -73,6 +73,27 @@ public class Trie {
         return current.isEndOfWord;
     }
 
+    public boolean containsRecursive(String word) {
+        if (word == null) {
+            return false;
+        }
+        return containsRecursive(root, word, 0);
+    }
+    private boolean containsRecursive(Node root, String word, int index) {
+        if (index == word.length()) {
+            return false;
+        }
+        Node current = root.getChild(word.charAt(index));
+        if (current == null) {
+            return false;
+        }
+        char val = current.value;
+        if (val == word.charAt(index) && current.isEndOfWord && index == word.length() - 1) {
+            return true;
+        }
+        return containsRecursive(current, word, index + 1);
+    }
+
     public void traverse() {
         traverse(root);
     }

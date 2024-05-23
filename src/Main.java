@@ -10,8 +10,6 @@ public class Main {
         trie.insert("care");
         trie.insert("careful");
         trie.remove("egg");
-        List<String> result = trie.findWords("cargo");
-        List<String> result2 = trie.findWords(null);
-        System.out.println(result2);
+        System.out.println(trie.containsRecursive("egg"));
     }
 }
