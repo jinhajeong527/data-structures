@@ -112,6 +112,21 @@ public class Trie {
         return words;
     }
 
+    public int countWords() {
+        return countWords(root);
+    }
+
+    private int countWords(Node root) {
+        int count = 0;
+        if (root.isEndOfWord) {
+            count++;
+        }
+        for (Node node: root.getChildren()) {
+            count += countWords(node);
+        }
+        return count;
+    }
+
     private void findWords(Node root, String prefix, List<String> words) {
         if (root == null) {
             return;
