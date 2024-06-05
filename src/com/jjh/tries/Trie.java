@@ -116,6 +116,42 @@ public class Trie {
         return countWords(root);
     }
 
+    public static String longestCommonPrefix(String[] words) {
+        if (words == null) {
+            return "";
+        }
+        Trie trie = new Trie();
+        for (String word: words) {
+            trie.insert(word);
+        }
+
+        StringBuffer prefix = new StringBuffer();
+        int maxChars = getShortest(words).length();
+        Node current = trie.root;
+        while (prefix.length() < maxChars) {
+            Node[] children = current.getChildren();
+            if (children.length != 1) {
+                break;
+            }
+            current = children[0];
+            prefix.append(current.value);
+        }
+
+        return prefix.toString();
+    }
+    private static String getShortest(String[] words) {
+        if (words == null || words.length == 0) {
+            return "";
+        }
+        String shortest = words[0];
+        for (int i = 1; i < words.length; i++) {
+            if (words[i].length() < shortest.length()) {
+                shortest = words[i];
+            }
+        }
+        return shortest;
+    }
+
     private int countWords(Node root) {
         int count = 0;
         if (root.isEndOfWord) {
