@@ -7,6 +7,7 @@ public class Main {
         arr.insert(4);
         arr.insert(5);
         arr.insert(6);
+        arr.removeAt(4);
         arr.print();
     }
 }
